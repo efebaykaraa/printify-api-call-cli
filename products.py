@@ -1,6 +1,10 @@
 import requests
+from typing import Tuple, Optional
+import shops
 
-def SelectProductId(token: str, shop_id: int) -> int:
+def SelectProductId(token: str) -> Tuple[int, int]:
+    shop_id = shops.SelectShopId(token)
+
     # The endpoint for listing products in a shop
     url = f'https://api.printify.com/v1/shops/{shop_id}/products.json'
 
@@ -22,5 +26,9 @@ def SelectProductId(token: str, shop_id: int) -> int:
         print(f"Failed to list products: {response.status_code} - {response.text}")
 
     # Select one of the products
-    product_id = input("Enter the product index: ")
-    return products['data'][int(product_id)]['id']
+    product_index = input("Enter the product index: ")
+    return (shop_id, products['data'][int(product_index)]['id'])
+
+def SelectProductAndToURL(token: str) -> str:
+    shop_id, product_id = SelectProductId(token)
+    return f'https://api.printify.com/v1/shops/{shop_id}/products/{product_id}.json'

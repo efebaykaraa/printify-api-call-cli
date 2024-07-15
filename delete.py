@@ -6,7 +6,7 @@ import products
 api_token = get_token.Get()
 
 # The endpoint for deleting a product
-url = products.SelectProductAndToURL(api_token)
+url = products.SelectProductAndToURL(api_token) + '.json'
 
 # Headers including the authorization token
 headers = {
@@ -18,7 +18,7 @@ headers = {
 response = requests.delete(url, headers=headers)
 
 # Checking the response
-if response.status_code == 204:
+if response.status_code == 200:
     print("Product deleted successfully")
 else:
     print(f"Failed to delete product: {response.status_code} - {response.text}")

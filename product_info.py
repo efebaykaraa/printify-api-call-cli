@@ -5,13 +5,7 @@ import get_token
 import pyperclip
 
 def GetProductInfo(token: str) -> Optional[dict]:
-    shop_id, product_id = products.SelectProductId(token)
-    if shop_id is None or product_id is None:
-        print("Failed to select a product.")
-        return None
-
-    # The endpoint for retrieving product information
-    url = f'https://api.printify.com/v1/shops/{shop_id}/products/{product_id}.json'
+    url = products.SelectProductAndToURL(token) + '.json'
 
     # Headers including the authorization token
     headers = {

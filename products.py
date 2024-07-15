@@ -31,4 +31,4 @@ def SelectProductId(token: str) -> Tuple[int, int]:
 
 def SelectProductAndToURL(token: str) -> str:
     shop_id, product_id = SelectProductId(token)
-    return f'https://api.printify.com/v1/shops/{shop_id}/products/{product_id}.json'
+    return f'https://api.printify.com/v1/shops/{shop_id}/products/{product_id}'
